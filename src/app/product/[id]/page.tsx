@@ -12,11 +12,14 @@ export const metadata: Metadata = {
   description: 'View detailed information about our financial products',
 };
 
-type tParams = Promise<{ id: string }>;
+type Props = {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+};
 
-export default async function ProductPage({ params }: { params: tParams }) {
-  const { id }: { id: string } = await params;
-  const product = products.find((p) => p.id === id);
+export default async function ProductPage({ params, searchParams }: Props) {
+  const [resolvedParams] = await Promise.all([params, searchParams]);
+  const product = products.find((p) => p.id === resolvedParams.id);
 
   if (!product) {
     notFound();
