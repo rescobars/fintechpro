@@ -2,18 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Card from './styled/Card';
 import Button from './styled/Button';
-
-interface ProductCardProps {
-  id: string;
-  title: string;
-  description: string;
-  category: string;
-  type: string;
-  interestRate?: string;
-  minimumAmount?: string;
-  riskLevel?: 'Bajo' | 'Medio' | 'Alto';
-  imageUrl: string;
-}
+import { Product } from '@/data/products';
 
 const getRiskLevelColor = (riskLevel?: 'Bajo' | 'Medio' | 'Alto') => {
   switch (riskLevel) {
@@ -28,6 +17,18 @@ const getRiskLevelColor = (riskLevel?: 'Bajo' | 'Medio' | 'Alto') => {
   }
 };
 
+interface ProductCardProps {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  type: string;
+  interestRate?: string;
+  minimumAmount?: string;
+  riskLevel?: 'Bajo' | 'Medio' | 'Alto';
+  imageUrl: string;
+}
+
 const ProductCard = ({
   id,
   title,
@@ -40,32 +41,52 @@ const ProductCard = ({
   imageUrl,
 }: ProductCardProps) => {
   return (
-    <Card as="article" elevated>
+    <Card 
+      as="article" 
+      elevated
+      className="h-full flex flex-col"
+      role="article"
+      aria-labelledby={`product-title-${id}`}
+    >
       <div className="relative h-48 w-full">
         <Image
           src={imageUrl}
-          alt={title}
+          alt={`Imagen de ${title}`}
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           priority={false}
         />
       </div>
-      <div className="p-6">
+      <div className="p-6 flex flex-col flex-grow">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-blue-600" aria-label={`Categoría: ${category}`}>
+          <span 
+            className="text-sm font-medium text-blue-600" 
+            aria-label={`Categoría: ${category}`}
+          >
             {category}
           </span>
           {interestRate && (
-            <span className="text-sm font-semibold text-green-600" aria-label={`Tasa de interés: ${interestRate}`}>
+            <span 
+              className="text-sm font-semibold text-green-600"
+              aria-label={`Tasa de interés: ${interestRate}`}
+            >
               {interestRate} TEA
             </span>
           )}
         </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2">{title}</h3>
-        <p className="text-gray-600 mb-2">{description}</p>
-        <div className="flex items-center justify-between mb-2">
-          <span className="text-sm text-gray-500" aria-label={`Tipo: ${type}`}>
+        <h3 
+          id={`product-title-${id}`}
+          className="text-xl font-bold text-gray-900 mb-2"
+        >
+          {title}
+        </h3>
+        <p className="text-gray-600 mb-4 flex-grow">{description}</p>
+        <div className="flex items-center justify-between mb-4">
+          <span 
+            className="text-sm text-gray-500"
+            aria-label={`Tipo: ${type}`}
+          >
             Tipo: {type}
           </span>
           {riskLevel && (
