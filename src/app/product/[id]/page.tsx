@@ -6,12 +6,10 @@ import RiskReturnChart from '@/components/RiskReturnChart';
 import Card from '@/components/styled/Card';
 import Button from '@/components/styled/Button';
 
-interface ProductPageProps {
-  params: Promise<{
-    id: string;
-  }>;
+type ProductPageProps = {
+  params: Promise<{ id: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-}
+};
 
 export default async function ProductPage({ params }: ProductPageProps) {
   const resolvedParams = await params;

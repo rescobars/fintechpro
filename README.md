@@ -53,10 +53,18 @@ yarn install
 
 3. Iniciar el servidor de desarrollo:
 ```bash
+pnpm dev  # Recomendado
+# o
 npm run dev
 # o
 yarn dev
 ```
+
+> 💡 **¿Por qué usar pnpm?**
+> - **Eficiencia en el espacio**: pnpm usa un almacenamiento de contenido direccionable que evita duplicar paquetes, ahorrando espacio en disco.
+> - **Instalación más rápida**: Al usar enlaces duros y un almacenamiento compartido, las instalaciones son significativamente más rápidas.
+> - **Seguridad mejorada**: pnpm crea una estructura de node_modules estricta que evita el acceso a paquetes no declarados.
+> - **Consistencia**: Garantiza que todos los desarrolladores usen exactamente las mismas versiones de dependencias.
 
 ## Desarrollo
 
