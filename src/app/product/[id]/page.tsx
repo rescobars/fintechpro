@@ -6,9 +6,10 @@ import RiskReturnChart from '@/components/RiskReturnChart';
 import Card from '@/components/styled/Card';
 import Button from '@/components/styled/Button';
 
+export type paramsType = Promise<{ id: string }>;
 
-export default async function ProductPage({params}: {params: Promise<{ id: string }>}) {
-  const { id } = await params;
+export default async function ProductPage(props: { params: paramsType }) {
+  const { id } = await props.params;
 
   const product = products.find((p) => p.id === id);
 
