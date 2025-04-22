@@ -7,13 +7,12 @@ import Card from '@/components/styled/Card';
 import Button from '@/components/styled/Button';
 
 type ProductPageProps = {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  params: { id: string };
+  searchParams: { [key: string]: string | string[] | undefined };
 };
 
 export default async function ProductPage({ params }: ProductPageProps) {
-  const resolvedParams = await params;
-  const product = products.find((p) => p.id === resolvedParams.id);
+  const product = products.find((p) => p.id === params.id);
 
   if (!product) {
     notFound();
