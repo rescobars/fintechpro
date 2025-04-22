@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,12 +13,14 @@ export const metadata: Metadata = {
   description: 'View detailed information about our financial products',
 };
 
-type Props = {
-  params: Promise<{ id: string }>;
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-};
 
-export default async function ProductPage({ params, searchParams }: Props) {
+//TODO: fix this, something is wrong with the types of the params and searchParams in vercel, pnpm run build works fine locally but not in vercel
+// type Props = {
+//   params: Promise<{ id: string }>;
+//   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+// };
+
+export default async function ProductPage({ params, searchParams }: any) {
   const [resolvedParams] = await Promise.all([params, searchParams]);
   const product = products.find((p) => p.id === resolvedParams.id);
 
