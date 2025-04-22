@@ -2,7 +2,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Card from './styled/Card';
 import Button from './styled/Button';
-import { Product } from '@/data/products';
 
 const getRiskLevelColor = (riskLevel?: 'Bajo' | 'Medio' | 'Alto') => {
   switch (riskLevel) {
