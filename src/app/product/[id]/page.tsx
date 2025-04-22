@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,14 +6,11 @@ import RiskReturnChart from '@/components/RiskReturnChart';
 import Card from '@/components/styled/Card';
 import Button from '@/components/styled/Button';
 
-type Params = Promise<{ id: string }>
- 
-export default async function ProductPage(props: {
-  params: Params
-}) {
-  const params = await props.params;
 
-  const product = products.find((p) => p.id === params.id);
+export default async function ProductPage({params}: {params: Promise<{ id: string }>}) {
+  const { id } = await params;
+
+  const product = products.find((p) => p.id === id);
 
   if (!product) {
     notFound();
