@@ -214,3 +214,9 @@ Para mejorar el rendimiento y monitoreo en producción:
   - Monitoreo de intentos de intrusión
   - Auditorías de seguridad periódicas
 
+## NOTA
+
+Durante el desarrollo del proyecto, me encontré con problemas de compatibilidad entre Vercel y Next.js 15 que me impidieron desplegar exitosamente en la plataforma. Realicé múltiples intentos de solución a través de commits específicos, pero no logré resolver el problema. Como alternativa, opté por desplegar la aplicación en Render, donde funcionó correctamente. Los commits relacionados con mis intentos de solución en Vercel se mantienen en el historial como referencia.
+
+
+
