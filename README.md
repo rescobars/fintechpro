@@ -41,8 +41,7 @@ src/
 
 1. Clonar el repositorio:
 ```bash
-git clone [url-del-repositorio]
-cd test
+git clone [[url-del-repositorio]](https://github.com/rescobars/fintechpro.git)
 ```
 
 2. Instalar dependencias:
