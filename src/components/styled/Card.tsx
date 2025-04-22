@@ -1,21 +1,30 @@
-import { HTMLAttributes, forwardRef } from 'react';
+import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
-interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  as?: 'div' | 'article' | 'section';
+interface CardProps extends React.HTMLAttributes<HTMLElement> {
+  as?: React.ElementType;
   elevated?: boolean;
 }
 
-const Card = forwardRef<HTMLDivElement, CardProps>(
-  ({ children, as: Component = 'div', elevated = false, className = '', ...props }, ref) => {
-    const baseStyles = 'bg-white rounded-lg overflow-hidden';
-    const elevationStyles = elevated
-      ? 'shadow-lg hover:shadow-xl transition-shadow duration-300'
-      : 'shadow-md hover:shadow-lg transition-shadow duration-300';
+const Card = React.forwardRef<HTMLElement, CardProps>(
+  ({ 
+    children, 
+    as: Component = 'div', 
+    elevated = false,
+    className,
+    ...props 
+  }, ref) => {
+    const baseClasses = 'bg-white rounded-lg overflow-hidden';
+    const elevationClass = elevated ? 'shadow-lg' : 'shadow';
 
     return (
       <Component
         ref={ref}
-        className={`${baseStyles} ${elevationStyles} ${className}`}
+        className={twMerge(
+          baseClasses,
+          elevationClass,
+          className
+        )}
         {...props}
       >
         {children}
