@@ -1,35 +1,36 @@
 import { categories } from '@/data/products';
-
-interface CategoryFilterProps {
-  selectedCategory: string | null;
-  onCategoryChange: (category: string | null) => void;
-}
+import { ProductCategory, CategoryFilterProps } from '@/types/product';
+import Button from './styled/Button';
 
 const CategoryFilter = ({ selectedCategory, onCategoryChange }: CategoryFilterProps) => {
+  const handleCategoryChange = (category: ProductCategory | null) => {
+    onCategoryChange(category);
+  };
+
   return (
-    <div className="flex flex-wrap gap-2 justify-center mb-8">
-      <button
-        onClick={() => onCategoryChange(null)}
-        className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-          selectedCategory === null
-            ? 'bg-blue-600 text-white'
-            : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-        }`}
+    <div 
+      className="flex flex-wrap gap-2 justify-center mb-8"
+      role="group"
+      aria-label="Filtro de categorías"
+    >
+      <Button
+        variant={selectedCategory === null ? 'primary' : 'secondary'}
+        onClick={() => handleCategoryChange(null)}
+        className="rounded-full"
+        aria-pressed={selectedCategory === null}
       >
         Todos
-      </button>
+      </Button>
       {categories.map((category) => (
-        <button
+        <Button
           key={category}
-          onClick={() => onCategoryChange(category)}
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-            selectedCategory === category
-              ? 'bg-blue-600 text-white'
-              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-          }`}
+          variant={selectedCategory === category ? 'primary' : 'secondary'}
+          onClick={() => handleCategoryChange(category)}
+          className="rounded-full"
+          aria-pressed={selectedCategory === category}
         >
           {category}
-        </button>
+        </Button>
       ))}
     </div>
   );
