@@ -1,17 +1,15 @@
 'use client';
 
-import { useState } from 'react';
 import Header from '@/components/Header';
 import ProductCard from '@/components/ProductCard';
 import CategoryFilter from '@/components/CategoryFilter';
 import { products } from '@/data/products';
+import { useProductFilters } from '@/hooks/useProductFilters';
 
 export default function Home() {
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-
-  const filteredProducts = selectedCategory
-    ? products.filter((product) => product.category === selectedCategory)
-    : products;
+  const { selectedCategory, setSelectedCategory, filteredProducts } = useProductFilters({
+    products,
+  });
 
   return (
     <main className="min-h-screen bg-gray-50">
