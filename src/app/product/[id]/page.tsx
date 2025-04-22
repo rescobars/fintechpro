@@ -6,23 +6,15 @@ import { products } from '@/data/products';
 import RiskReturnChart from '@/components/RiskReturnChart';
 import Card from '@/components/styled/Card';
 import Button from '@/components/styled/Button';
-import { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Product Details',
-  description: 'View detailed information about our financial products',
-};
+type Params = Promise<{ id: string }>
+ 
+export default async function ProductPage(props: {
+  params: Params
+}) {
+  const params = await props.params;
 
-
-//TODO: fix this, something is wrong with the types of the params and searchParams in vercel, pnpm run build works fine locally but not in vercel
-// type Props = {
-//   params: Promise<{ id: string }>;
-//   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
-// };
-
-export default async function ProductPage({ params, searchParams }: any) {
-  const [resolvedParams] = await Promise.all([params, searchParams]);
-  const product = products.find((p) => p.id === resolvedParams.id);
+  const product = products.find((p) => p.id === params.id);
 
   if (!product) {
     notFound();
