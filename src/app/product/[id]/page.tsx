@@ -5,14 +5,21 @@ import { products } from '@/data/products';
 import RiskReturnChart from '@/components/RiskReturnChart';
 import Card from '@/components/styled/Card';
 import Button from '@/components/styled/Button';
+import { Metadata } from 'next';
 
-type ProductPageProps = {
-  params: { id: string };
-  searchParams: { [key: string]: string | string[] | undefined };
+export const metadata: Metadata = {
+  title: 'Product Details',
+  description: 'View detailed information about our financial products',
 };
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  const product = products.find((p) => p.id === params.id);
+interface PageProps {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function ProductPage({ params, searchParams }: PageProps) {
+  const [resolvedParams] = await Promise.all([params, searchParams]);
+  const product = products.find((p) => p.id === resolvedParams.id);
 
   if (!product) {
     notFound();
